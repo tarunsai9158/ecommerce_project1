@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}feedback{% endblock %}
+
+{% block content %}
+<section id="bookings">
+    <h2>Feedback</h2>
+    <form action="{% url 'bookings' %}" method="POST">
+        {% csrf_token %}
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        
+        <label for="feedback">Feedback:</label>
+        <input type="text" id="feedback" name="feedback" required>
+       
+        <button type="submit">Submit</button>
+    </form>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="alert {{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+</section>
+
+
+{% endblock %}

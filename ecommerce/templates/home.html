@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Your Store{% endblock %}
+
+{% block content %}
+<section id="hero">
+    <h2>Shop the Best Products</h2>
+    <p>Discover amazing deals and products tailored for you.</p>
+    <a href="{% url 'menu' %}" class="btn">Shop Now</a>
+</section>
+
+<section id="features">
+    <h3>Why Shop With Us?</h3>
+    <ul>
+        <li>Quality Products</li>
+        <li>Fast Shipping</li>
+        <li>Excellent Support</li>
+    </ul>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="alert {{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+</section>
+
+
+{% endblock %}

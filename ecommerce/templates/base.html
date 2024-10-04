@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Store{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    
+       
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        
+    
+</head>
+<body>
+    
+    <!-- Header -->
+    <header>
+        <h1>Ts Electronics</h1>
+        <nav>
+            <ul>
+                <li class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+                    <a href="{% url 'home' %}">Home</a>
+                </li>
+                
+                <li class="{% if request.resolver_match.url_name == 'menu' %}active{% endif %}">
+                    <a href="{% url 'menu' %}">Menu</a>
+                </li>
+                <li class="{% if request.resolver_match.url_name == 'bookings' %}active{% endif %}">
+                    <a href="{% url 'bookings' %}">Bookings</a>
+                </li>
+
+
+               <li class="{% if request.resolver_match.url_name == 'cart_view' %}active{% endif %}">
+                    <a href="{% url 'cart_view' %}">Cart</a>
+                </li>
+                <li class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">
+                    <a href="{% url 'about' %}">About</a>
+                </li>
+
+                {% if user.is_authenticated %}
+                <li>  Hello, {{user.username}}</li>
+                <li><a href="{% url 'logout' %}">logout</a></li>
+                {% else %}
+                <li class="{% if request.resolver_match.url_name == 'login' %}active{% endif %}">
+                    <a href="{% url 'login' %}">Login</a>
+                </li>
+                {% endif %}
+
+                
+            </ul>
+        </nav>
+        
+    </header>
+
+   
+    <main>
+        {% block content %}
+        
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Ts Electronics. All rights reserved.</p>
+    </footer>
+
+    
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+</html>

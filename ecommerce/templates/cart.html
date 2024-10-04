@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% comment %} {% load cart_filters %} {% endcomment %}
+
+{% block title %}
+    Products Menu
+{% endblock %}
+
+{% block content %}
+
+<h1>cart</h1>
+
+{% comment %} <div class="category-menu">
+    <h2>Product Categories</h2>
+    <ul class="category-list">
+        <li class="{% if selected_category == 'all' %}active{% endif %}">
+            <a href="{% url 'menu' %}?category=all">All</a>
+        </li>
+        {% for category in categories %}
+            <li class="{% if selected_category == category.id %}active{% endif %}">
+                <a href="{% url 'menu' %}?category={{ category.id }}">{{ category.Category_name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="product-list">
+    {% for product in products %}
+    <div class="product-card">
+        {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        {% else %}
+        <img src="{% static 'images/default_product.png' %}" alt="No Image Available">
+        {% endif %}
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.description }}</p>
+        <p><strong>Price:</strong> ${{ product.price }}</p>
+
+        <form method="POST" action="{% url 'add_to_cart' product.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Add to Cart</button>
+        </form>
+
+        <div class="quantity-control" id="product-{{ product.id }}">
+            <form method="POST" action="{% url 'update_cart' product.id %}">
+                {% csrf_token %}
+                <button type="submit" name="action" value="decrement" class="btn btn-secondary">-</button>
+                <input type="text" name="quantity" value="{% if cart_items|get_item:product.id %}{{ cart_items|get_item:product.id }}{% else %}0{% endif %}" readonly>
+                <button type="submit" name="action" value="increment" class="btn btn-secondary">+</button>
+            </form>
+        </div>
+    </div>
+    {% empty %}
+    <p>No products available in this category.</p>
+    {% endfor %}
+</div>
+ {% endcomment %}
+ {% endblock %}

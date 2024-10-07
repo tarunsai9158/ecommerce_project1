@@ -16,7 +16,7 @@
     
     <!-- Header -->
     <header>
-        <h1>Ts Electronics</h1>
+        <h1>Stop & Buy</h1>
         <nav>
             <ul>
                 <li class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">
@@ -27,7 +27,7 @@
                     <a href="{% url 'menu' %}">Menu</a>
                 </li>
                 <li class="{% if request.resolver_match.url_name == 'bookings' %}active{% endif %}">
-                    <a href="{% url 'bookings' %}">Bookings</a>
+                    <a href="{% url 'bookings' %}">Feedback</a>
                 </li>
 
 
@@ -62,7 +62,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 Ts Electronics. All rights reserved.</p>
+        <p>&copy; 2024 Stop & Buy. All rights reserved.</p>
     </footer>
 
     
